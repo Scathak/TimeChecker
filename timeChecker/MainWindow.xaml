@@ -1,0 +1,53 @@
+﻿<Window x:Class="timeChecker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:timeChecker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="520"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown" >
+    <Grid Margin="0,0,0,-158">
+        <Grid.Background>
+            <ImageBrush ImageSource="/images/background4.jpg" TileMode="Tile"/>
+        </Grid.Background>
+        <TextBox Name="timerLabel" FontSize ="18" Margin="0,31,0,0" TextWrapping="Wrap" Text="" Width="475" Height="47" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}" Foreground="#FFFFDB33" TextAlignment="Center" BorderBrush="#FFFFDB33" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" IsUndoEnabled="False" IsReadOnly="True" Focusable="False" IsTabStop="False" AllowDrop="False" IsHitTestVisible="False">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <ListBox Name ="lstTimers" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="22,98,23,290" Background="{x:Null}" SelectionChanged="lstTimers_SelectionChanged" Foreground="#FFFFDB33" BorderBrush="#FFFFDB33"/>
+
+
+
+        <Button Content=" X " HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}"  Foreground="#FFFFDB33" Margin="479,0,0,0" Click="Button_Click"/>
+        <Button Name ="btnInterval05" Content=" +5 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="22,389,0,0" VerticalAlignment="Top" Click="BtnInterval05_Click" BorderBrush="#FFFFDB33" RenderTransformOrigin="0.832,0.401"/>
+        <Button Name ="btnInterval10" Content=" +10 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="80,389,0,0" VerticalAlignment="Top" Click="BtnInterval10_Click" BorderBrush="#FFFFDB33" RenderTransformOrigin="0.63,0.451"/>
+        <Button Name ="btnInterval30" Content=" +30 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="145,389,0,0" VerticalAlignment="Top" Click="BtnInterval30_Click" BorderBrush="#FFFFDB33"/>
+        <Button Name ="btnInterval50" Content=" +50 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="213,389,0,0" VerticalAlignment="Top" Click="BtnInterval50_Click" BorderBrush="#FFFFDB33"/>
+        <Button Name ="btnInterval55" Content=" +55 " Foreground="#FFFFDB33" Margin="280,389,208,0" VerticalAlignment="Top" Click="btnInterval55_Click" BorderBrush="#FFFFDB33">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Name ="btnDelete" Content=" Delete " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="349,389,0,0" VerticalAlignment="Top" Click="BtnDelete_Click" BorderBrush="#FFFFDB33" Visibility ="Collapsed"/>
+        <TextBox x:Name="AffirmationTextbox" FontSize ="12" Margin="0,437,0,0" TextWrapping="Wrap" Text="" Width="475" Height="47" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}" Foreground="#FFFFDB33" TextAlignment="Center" BorderBrush="#FFFFDB33" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" IsUndoEnabled="False" IsReadOnly="True" Focusable="False" IsTabStop="False" AllowDrop="False" IsHitTestVisible="False">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+    </Grid>
+
+</Window>
