@@ -34,7 +34,7 @@ namespace timeChecker
 
 		public AffirmationContainer? affirmationsContainer;
 
-		readonly int[] intervalLength = [1, 10, 30, 50, 55];
+		readonly int[] intervalLength = [5, 10, 30, 50, 55];
         
 
 		public MainWindow()
