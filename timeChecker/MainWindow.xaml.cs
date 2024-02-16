@@ -35,7 +35,7 @@ namespace timeChecker
 		public AffirmationContainer? affirmationsContainer;
 
 		readonly int[] intervalLength = [5, 10, 30, 50, 55];
-        
+        readonly int timersMaxAmount = 96;
 
 		public MainWindow()
         {
@@ -43,7 +43,6 @@ namespace timeChecker
             StartClock();
             ReadStrings();
         }
-
 		public void ReadStrings()
 		{
             affirmationsContainer = new AffirmationContainer();
@@ -109,23 +108,42 @@ namespace timeChecker
         }
 		private void BtnInterval05_Click(object sender, RoutedEventArgs e)
 		{
-            setupNewTimer(0);
+            if (checkTimersAmount())
+            {
+                setupNewTimer(0);
+            }
 		}
 		private void BtnInterval10_Click(object sender, RoutedEventArgs e)
 		{
-			setupNewTimer(1);
+            if (checkTimersAmount())
+            {
+                setupNewTimer(1);
+            }
 		}
 		private void BtnInterval30_Click(object sender, RoutedEventArgs e)
 		{
-			setupNewTimer(2);
+            if (checkTimersAmount())
+            {
+                setupNewTimer(2);
+            }
 		}
 		private void BtnInterval50_Click(object sender, RoutedEventArgs e)
         {
-			setupNewTimer(3);
+            if (checkTimersAmount())
+            {
+                setupNewTimer(3);
+            }
 		}
 		private void btnInterval55_Click(object sender, RoutedEventArgs e)
 		{
-			setupNewTimer(4);
+            if (checkTimersAmount())
+            {
+                setupNewTimer(4);
+            }
+		}
+		private bool checkTimersAmount()
+		{
+			return (timersList.Count < timersMaxAmount);
 		}
 		private DispatcherTimer NewTimerStart(int interval)
         {
