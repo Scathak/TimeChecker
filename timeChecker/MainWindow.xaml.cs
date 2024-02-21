@@ -5,12 +5,52 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace timeChecker
 {
-    public partial class MainWindow : Window
+	public partial class MainWindow : Window
     {
-        private readonly List<DispatcherTimer> timersList = [];
+		public interface IReader
+		{
+			public Affirmation[]? ReadAll();
+		}
+		public class FileReader(string fileName) : IReader
+		{
+			private readonly string _fileName = fileName;
+
+			public Affirmation[]? ReadAll()
+			{
+				try
+				{
+					using var r = new StreamReader(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + _fileName);
+				    var json = r.ReadToEnd();
+				    return JsonConvert.DeserializeObject<AffirmationContainer>(json)?.Affirmations;
+				}
+				catch (FileNotFoundException e)
+				{
+					Console.WriteLine($"The affirmations file was not found: '{e}'");
+				}
+				catch (DirectoryNotFoundException e)
+				{
+					Console.WriteLine($"The directory was not found: '{e}'");
+				}
+				catch (IOException e)
+				{
+					Console.WriteLine($"The affirmations file could not be opened: '{e}'");
+				}
+                return null;
+			}
+		}
+		public class StringService
+		{
+			public static Affirmation[]? GetStrings(IReader reader)
+			{
+				return reader.ReadAll();
+			}
+		}
+
+		private readonly List<DispatcherTimer> timersList = [];
         public class Affirmation
 		{
 			public int Id { get; set; }
@@ -34,7 +74,6 @@ namespace timeChecker
 
 		public AffirmationContainer? affirmationsContainer;
 
-		readonly int[] intervalLength = [5, 10, 30, 50, 55];
         readonly int timersMaxAmount = 96;
 
 		public MainWindow()
@@ -46,24 +85,8 @@ namespace timeChecker
 		public void ReadStrings()
 		{
             affirmationsContainer = new AffirmationContainer();
-			try
-			{
-				using var r = new StreamReader(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\affirmations.json");
-				string json = r.ReadToEnd();
-				affirmationsContainer.Affirmations = JsonConvert.DeserializeObject<AffirmationContainer>(json)?.Affirmations;
-			}
-			catch (FileNotFoundException e)
-			{
-				Console.WriteLine($"The file was not found: '{e}'");
-			}
-			catch (DirectoryNotFoundException e)
-			{
-				Console.WriteLine($"The directory was not found: '{e}'");
-			}
-			catch (IOException e)
-			{
-				Console.WriteLine($"The file could not be opened: '{e}'");
-			}
+            var fileReader = new FileReader("\\affirmations.json");
+			affirmationsContainer.Affirmations = StringService.GetStrings(fileReader);
 		}
 
 		private void StartClock()
@@ -108,40 +131,48 @@ namespace timeChecker
         }
 		private void BtnInterval05_Click(object sender, RoutedEventArgs e)
 		{
-            if (checkTimersAmount())
-            {
-                setupNewTimer(0);
-            }
+            ButtonAction(sender.ToString());
 		}
 		private void BtnInterval10_Click(object sender, RoutedEventArgs e)
 		{
-            if (checkTimersAmount())
-            {
-                setupNewTimer(1);
-            }
+			ButtonAction(sender.ToString());
 		}
 		private void BtnInterval30_Click(object sender, RoutedEventArgs e)
 		{
-            if (checkTimersAmount())
-            {
-                setupNewTimer(2);
-            }
+			ButtonAction(sender.ToString());
 		}
 		private void BtnInterval50_Click(object sender, RoutedEventArgs e)
         {
-            if (checkTimersAmount())
-            {
-                setupNewTimer(3);
-            }
+			ButtonAction(sender.ToString());
 		}
 		private void btnInterval55_Click(object sender, RoutedEventArgs e)
 		{
-            if (checkTimersAmount())
-            {
-                setupNewTimer(4);
-            }
+			ButtonAction(sender.ToString());
 		}
-		private bool checkTimersAmount()
+		private void ButtonAction(string input)
+        {
+			if (CheckTimersAmount())
+			{
+				int number = 0;
+				Match match = Regex.Match(input, @"\d+");
+				if (match.Success)
+				{
+					int.TryParse(match.Value, out number);
+				}
+				SetupNewTimer(number);
+			}
+		}
+		private void SetupNewTimer(int timerDuration)
+		{
+			timersList.Add(NewTimerStart(timerDuration));
+			lstTimers.Items.Add($"The alarm {timerDuration} minutes will go off at: ");
+			if (timersList.Count == 1)
+			{
+				timersList[0].Start();
+				lstTimers.Items[0] += DateTime.Now.AddMinutes(timersList[0].Interval.TotalMinutes).ToString(@"hh:mm:ss");
+			}
+		}
+		private bool CheckTimersAmount()
 		{
 			return (timersList.Count < timersMaxAmount);
 		}
@@ -174,7 +205,7 @@ namespace timeChecker
                 }
             }
         }
-        private void lstTimers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LstTimers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstTimers.SelectedIndex >= 0) {
                 btnDelete.Visibility =  Visibility.Visible;
@@ -189,15 +220,5 @@ namespace timeChecker
         {
             Application.Current.MainWindow.Close();
         }
-        private void setupNewTimer(int timerNumber)
-        {
-            timersList.Add(NewTimerStart(intervalLength[timerNumber]));
-			lstTimers.Items.Add($"The alarm {intervalLength[timerNumber]} minutes will go off at: ");
-			if (timersList.Count == 1)
-			{
-				timersList[0].Start();
-				lstTimers.Items[0] += DateTime.Now.AddMinutes(timersList[0].Interval.TotalMinutes).ToString(@"hh:mm:ss");
-			}
-		}
 	}
 }

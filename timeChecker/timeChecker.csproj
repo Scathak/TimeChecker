@@ -11,8 +11,7 @@
 
   <ItemGroup>
     <None Remove="affirmations.json" />
-    <None Remove="images\background4.jpg" />
-    <None Remove="wav\alarm1.wav" />
+    <None Remove="images\background4.jpg" />    <None Remove="wav\alarm11.wav" />
   </ItemGroup>
 
   <ItemGroup>

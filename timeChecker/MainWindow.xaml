@@ -23,7 +23,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <ListBox Name ="lstTimers" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="22,98,23,290" Background="{x:Null}" SelectionChanged="lstTimers_SelectionChanged" Foreground="#FFFFDB33" BorderBrush="#FFFFDB33"/>
+        <ListBox Name ="lstTimers" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="22,98,23,290" Background="{x:Null}" SelectionChanged="LstTimers_SelectionChanged" Foreground="#FFFFDB33" BorderBrush="#FFFFDB33"/>
 
 
 
