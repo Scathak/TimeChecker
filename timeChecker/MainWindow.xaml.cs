@@ -14,10 +14,6 @@ namespace timeChecker
             ReadStrings();
         }
 		
-        private void ClockUpdate()
-        {
-            timerLabel.Text = DateTime.Now.ToString(@"hh:mm:ss");
-        }
 		private void BtnInterval05_Click(object sender, RoutedEventArgs e)
 		{
             ButtonAction(sender.ToString());

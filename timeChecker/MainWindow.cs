@@ -34,5 +34,9 @@ namespace timeChecker
 		{
 			ClockUpdate();
 		}
+		private void ClockUpdate()
+		{
+			timerLabel.Text = DateTime.Now.ToString(@"hh:mm:ss");
+		}
 	}
 }
