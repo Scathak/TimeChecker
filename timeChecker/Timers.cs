@@ -1,7 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Media;
 using System.Windows.Threading;
-using System.IO;
 
 namespace timeChecker
 {
@@ -11,15 +9,8 @@ namespace timeChecker
 		{
 			if (timersList.Count > 0)
 			{
-				var uri = new Uri(
-									Path.Combine(
-										   AppDomain.CurrentDomain.BaseDirectory
-										, "wav"
-										, "alarm1.wav")
-								 );
-				var player = new MediaPlayer();
-				player.Open(uri);
-				player.Play();
+				var alarm = new AlarmPlayer("alarm1.wav");
+				alarm.StartAlarm();
 
 				timersList[0].Stop();
 				timersList.RemoveAt(0);
