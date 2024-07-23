@@ -10,6 +10,7 @@ namespace timeChecker
 			if (timersList.Count > 0)
 			{
 				this.Topmost = true;
+                this.Topmost = false;
                 var alarm = new AlarmPlayer("alarm1.wav");
 				alarm.StartAlarm();
 
