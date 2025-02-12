@@ -36,7 +36,7 @@ namespace timeChecker
 		}
 		private void ClockUpdate()
 		{
-			timerLabel.Text = DateTime.Now.ToString(@"hh:mm:ss") + "\nbefore alarm: ";
+			timerLabel.Text = DateTime.Now.ToString(@"hh:mm:ss") + "  " + DateTime.Now.ToString("dd/MM/yyyy");
 		}
 	}
 }
