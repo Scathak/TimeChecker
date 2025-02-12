@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace timeChecker
@@ -8,8 +9,7 @@ namespace timeChecker
 		private readonly List<DispatcherTimer> timersList = [];
 		public AffirmationContainer? affirmationsContainer;
 		readonly int timersMaxAmount = 96;
-
-		public void ReadStrings()
+        public void ReadStrings()
 		{
 			affirmationsContainer = new AffirmationContainer();
 
@@ -36,7 +36,7 @@ namespace timeChecker
 		}
 		private void ClockUpdate()
 		{
-			timerLabel.Text = DateTime.Now.ToString(@"hh:mm:ss");
+			timerLabel.Text = DateTime.Now.ToString(@"hh:mm:ss") + "\nbefore alarm: ";
 		}
 	}
 }

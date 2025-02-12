@@ -2,19 +2,53 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace timeChecker
 {
 	public partial class MainWindow : Window
     {
-		public MainWindow()
+        public ObservableCollection<int> NumberList { get; set; }
+        public MainWindow()
         {
             InitializeComponent();
             StartClock();
             ReadStrings();
+
+            InitializeComponent();
+            NumberList = new ObservableCollection<int> { 5, 10, 30, 50, 55 }; // Initial values
+            NumberComboBox.ItemsSource = NumberList;
         }
-		
-		private void BtnInterval05_Click(object sender, RoutedEventArgs e)
+        private void NumberComboBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(NumberComboBox.Text))
+            {
+                if (int.TryParse(NumberComboBox.Text, out int newValue))
+                {
+                    if (!NumberList.Contains(newValue))
+                    {
+                        NumberList.Add(newValue);
+                        SortNumberList();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid number.");
+                    NumberComboBox.Text = "";
+                }
+            }
+        }
+        private void SortNumberList()
+        {
+            var sortedList = NumberList.OrderBy(n => n).ToList();
+            NumberList.Clear();
+            foreach (var num in sortedList)
+            {
+                NumberList.Add(num);
+            }
+        }
+        private void BtnInterval05_Click(object sender, RoutedEventArgs e)
 		{
             ButtonAction(sender.ToString());
 		}
@@ -44,7 +78,7 @@ namespace timeChecker
 				{
 					int.TryParse(match.Value, out number);
 				}
-				SetupNewTimer(number);
+                if(number > 0) SetupNewTimer(number);
 			}
 		}
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -80,5 +114,10 @@ namespace timeChecker
         {
             Application.Current.MainWindow.Close();
         }
-	}
+
+        private void btnIntervalAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonAction(NumberComboBox.Text);
+        }
+    }
 }
