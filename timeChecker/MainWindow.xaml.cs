@@ -78,7 +78,7 @@ namespace timeChecker
 				{
 					int.TryParse(match.Value, out number);
 				}
-                if(number > 0) SetupNewTimer(number);
+                if(number > 0 && number < 60) SetupNewTimer(number);
 			}
 		}
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
