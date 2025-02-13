@@ -1,13 +1,12 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Text.RegularExpressions;
-using System.Collections.ObjectModel;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace timeChecker
 {
-	public partial class MainWindow : Window
+    public partial class MainWindow : Window
     {
         public ObservableCollection<int> NumberList { get; set; }
         public MainWindow()
@@ -49,38 +48,38 @@ namespace timeChecker
             }
         }
         private void BtnInterval05_Click(object sender, RoutedEventArgs e)
-		{
+        {
             ButtonAction(sender.ToString());
-		}
-		private void BtnInterval10_Click(object sender, RoutedEventArgs e)
-		{
-			ButtonAction(sender.ToString());
-		}
-		private void BtnInterval30_Click(object sender, RoutedEventArgs e)
-		{
-			ButtonAction(sender.ToString());
-		}
-		private void BtnInterval50_Click(object sender, RoutedEventArgs e)
+        }
+        private void BtnInterval10_Click(object sender, RoutedEventArgs e)
         {
-			ButtonAction(sender.ToString());
-		}
-		private void btnInterval55_Click(object sender, RoutedEventArgs e)
-		{
-			ButtonAction(sender.ToString());
-		}
-		private void ButtonAction(string input)
+            ButtonAction(sender.ToString());
+        }
+        private void BtnInterval30_Click(object sender, RoutedEventArgs e)
         {
-			if (CheckTimersAmount())
-			{
-				int number = 0;
-				Match match = Regex.Match(input, @"\d+");
-				if (match.Success)
-				{
-					int.TryParse(match.Value, out number);
-				}
-                if(number > 0 && number < 60) SetupNewTimer(number);
-			}
-		}
+            ButtonAction(sender.ToString());
+        }
+        private void BtnInterval50_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonAction(sender.ToString());
+        }
+        private void btnInterval55_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonAction(sender.ToString());
+        }
+        private void ButtonAction(string input)
+        {
+            if (CheckTimersAmount())
+            {
+                int number = 0;
+                Match match = Regex.Match(input, @"\d+");
+                if (match.Success)
+                {
+                    int.TryParse(match.Value, out number);
+                }
+                if (number > 0 && number < 60) SetupNewTimer(number);
+            }
+        }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var selectedIndex = lstTimers.SelectedIndex;
@@ -90,20 +89,22 @@ namespace timeChecker
                 {
                     timersList[selectedIndex].Stop();
                     timersList.RemoveAt(selectedIndex);
-					lstTimers.Items.RemoveAt(selectedIndex);
-					if (selectedIndex == 0 && timersList.Count >= 1)
+                    lstTimers.Items.RemoveAt(selectedIndex);
+                    if (selectedIndex == 0 && timersList.Count >= 1)
                     {
                         timersList[0].Start();
-						lstTimers.Items[0] += DateTime.Now.AddMinutes(timersList[0].Interval.TotalMinutes).ToString(@"hh:mm:ss");
-					}
+                        lstTimers.Items[0] += DateTime.Now.AddMinutes(timersList[0].Interval.TotalMinutes).ToString(@"hh:mm:ss");
+                    }
                 }
             }
         }
         private void LstTimers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lstTimers.SelectedIndex >= 0) {
-                btnDelete.Visibility =  Visibility.Visible;
-            } else btnDelete.Visibility = Visibility.Collapsed;
+            if (lstTimers.SelectedIndex >= 0)
+            {
+                btnDelete.Visibility = Visibility.Visible;
+            }
+            else btnDelete.Visibility = Visibility.Collapsed;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

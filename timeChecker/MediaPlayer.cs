@@ -1,5 +1,5 @@
-﻿using System.Windows.Media;
-using System.IO;
+﻿using System.IO;
+using System.Windows.Media;
 
 namespace timeChecker
 {
