@@ -9,11 +9,11 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         MouseDown="Window_MouseDown" >
-    <Grid Margin="16,2,-16,-160">
+    <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/images/background4.jpg" TileMode="Tile"/>
         </Grid.Background>
-        <TextBox Name="timerLabel" FontSize ="18" Margin="0,31,0,0" TextWrapping="Wrap" Text="" Width="475" Height="47" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}" Foreground="#FFFFDB33" TextAlignment="Center" BorderBrush="#FFFFDB33" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" IsUndoEnabled="False" IsReadOnly="True" Focusable="False" IsTabStop="False" AllowDrop="False" IsHitTestVisible="False">
+        <TextBox Name="timerLabel" FontSize ="18" Margin="0,32,0,0" TextWrapping="Wrap" Text="" Width="472" Height="50" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}" Foreground="#FFFFDB33" TextAlignment="Center" BorderBrush="#FFFFDB33" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" IsUndoEnabled="False" IsReadOnly="True" Focusable="False" IsTabStop="False" AllowDrop="False" IsHitTestVisible="False">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -23,58 +23,62 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <ListBox Name ="lstTimers" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="22,98,23,290" Background="{x:Null}" SelectionChanged="LstTimers_SelectionChanged" Foreground="#FFFFDB33" BorderBrush="#FFFFDB33"/>
+        <ListBox Name ="lstTimers" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="103,131,103,75" Background="{x:Null}" SelectionChanged="LstTimers_SelectionChanged" Foreground="#FFFFDB33" BorderBrush="{x:Null}"/>
 
 
 
-        <Button Content=" X " HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}"  Foreground="#FFFFDB33" Margin="479,0,0,0" Click="Button_Click"/>
-        <Button Name ="btnInterval05" Content=" +5 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="120,389,0,0" VerticalAlignment="Top" Click="BtnInterval05_Click" BorderBrush="#FFFFDB33" RenderTransformOrigin="0.832,0.401"/>
-        <Button Name ="btnInterval10" Content=" +10 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="150,389,0,0" VerticalAlignment="Top" Click="BtnInterval10_Click" BorderBrush="#FFFFDB33" RenderTransformOrigin="0.63,0.451"/>
-        <Button Name ="btnInterval30" Content=" +30 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="186,389,0,0" VerticalAlignment="Top" Click="BtnInterval30_Click" BorderBrush="#FFFFDB33"/>
-        <Button Name ="btnInterval50" Content=" +50 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="224,389,0,0" VerticalAlignment="Top" Click="BtnInterval50_Click" BorderBrush="#FFFFDB33"/>
-        <Button Name ="btnInterval55" Content=" +55 " Foreground="#FFFFDB33" Margin="260,389,228,0" VerticalAlignment="Top" Click="btnInterval55_Click" BorderBrush="#FFFFDB33">
+        <Button Content=" X " HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}"  Foreground="#FFFFDB33" Margin="478,0,0,0" Click="Button_Click"/>
+		        
+        <TextBox x:Name="AffirmationTextbox" FontSize ="12" Margin="0,437,0,0" TextWrapping="Wrap" Text="" Width="472" Height="47" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}" Foreground="#FFFFDB33" TextAlignment="Center" BorderBrush="#FFFFDB33" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" IsUndoEnabled="False" IsReadOnly="True" Focusable="False" IsTabStop="False" AllowDrop="False" IsHitTestVisible="False">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Button Name ="btnInterval05" Content=" +5 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="123,97,0,0" VerticalAlignment="Top" Click="BtnInterval05_Click" BorderBrush="#FFFFDB33" RenderTransformOrigin="0.832,0.401"/>
+        <Button Name ="btnInterval10" Content=" +10 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="153,97,0,0" VerticalAlignment="Top" Click="BtnInterval10_Click" BorderBrush="#FFFFDB33" RenderTransformOrigin="0.63,0.451"/>
+        <Button Name ="btnInterval30" Content=" +30 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="189,97,0,0" VerticalAlignment="Top" Click="BtnInterval30_Click" BorderBrush="#FFFFDB33"/>
+        <Button Name ="btnInterval50" Content=" +50 " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="227,97,0,0" VerticalAlignment="Top" Click="BtnInterval50_Click" BorderBrush="#FFFFDB33"/>
+        <Button Name ="btnInterval55" Content=" +55 " Foreground="#FFFFDB33" Margin="263,97,225,0" VerticalAlignment="Top" Click="btnInterval55_Click" BorderBrush="#FFFFDB33">
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <Button Name ="btnDelete" Content=" Delete " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="314,389,0,0" VerticalAlignment="Top" Click="BtnDelete_Click" BorderBrush="#FFFFDB33" Visibility ="Collapsed"/>
-        <TextBox x:Name="AffirmationTextbox" FontSize ="12" Margin="0,437,0,0" TextWrapping="Wrap" Text="" Width="475" Height="47" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}" Foreground="#FFFFDB33" TextAlignment="Center" BorderBrush="#FFFFDB33" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" IsUndoEnabled="False" IsReadOnly="True" Focusable="False" IsTabStop="False" AllowDrop="False" IsHitTestVisible="False">
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
+		<Button x:Name ="btnDelete" Content=" Delete " HorizontalAlignment="Left" Background="{x:Null}" Foreground="#FFFFDB33" Margin="317,97,0,0" VerticalAlignment="Top" Click="BtnDelete_Click" BorderBrush="#FFFFDB33" />
         <ComboBox x:Name="NumberComboBox"
                   IsEditable="True"
                   StaysOpenOnEdit="True"
                   IsTextSearchEnabled="False"
                   LostFocus="NumberComboBox_LostFocus"
-                  Background="Brown"
+                  Background="{x:Null}"
                   Foreground="#FFFFDB33"
                   BorderBrush="#FFFFDB33" 
-                  HorizontalAlignment="Left" Margin="24,388,0,0" VerticalAlignment="Top" Width="45">
+                  HorizontalAlignment="Left" Margin="24,96,0,0" VerticalAlignment="Top" Width="45">
             <ComboBox.Resources>
-                <Style TargetType="ComboBox">
-                    <Setter Property="Background" Value="Brown"/>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Background" Value="{x:Null}"/>
                     <Setter Property="BorderBrush" Value="#FFFFDB33"/>
 
                 </Style>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Background" Value="Brown"/>
-                    <Setter Property="BorderBrush" Value="Brown"/>
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
                 </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Background" Value="Brown"/>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Background" Value="{x:Null}"/>
                     <Setter Property="BorderBrush" Value="#FFFFDB33"/>
 
                 </Style>
             </ComboBox.Resources>
+			<ComboBox.Style>
+                <StaticResource ResourceKey="{x:Static ToolBar.ComboBoxStyleKey}"/>
+            </ComboBox.Style>
         </ComboBox>
-        <Button Name ="btnIntervalAdd" Content="Add" HorizontalAlignment="Left" Foreground="#FFFFDB33" BorderBrush="#FFFFDB33" Background="{x:Null}" Margin="74,388,0,0" VerticalAlignment="Top" Height="22" Width="29" Click="btnIntervalAdd_Click"/>
+        <Button x:Name ="btnIntervalAdd" Content="Add" HorizontalAlignment="Left" Foreground="#FFFFDB33" BorderBrush="#FFFFDB33" Background="{x:Null}" Margin="74,96,0,0" VerticalAlignment="Top" Height="22" Width="29" Click="btnIntervalAdd_Click"/>
     </Grid>
 
 </Window>

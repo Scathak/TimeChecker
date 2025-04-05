@@ -23,7 +23,7 @@ namespace timeChecker
         {
             if (!string.IsNullOrWhiteSpace(NumberComboBox.Text))
             {
-                if (int.TryParse(NumberComboBox.Text, out int newValue))
+                if (int.TryParse(NumberComboBox.Text, out int newValue) && (newValue < 60 && newValue > 0))
                 {
                     if (!NumberList.Contains(newValue))
                     {
@@ -33,7 +33,7 @@ namespace timeChecker
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a valid number.");
+                    MessageBox.Show("Please enter a valid anount of minutes [1,59]");
                     NumberComboBox.Text = "";
                 }
             }
